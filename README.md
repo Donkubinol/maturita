@@ -1,4 +1,4 @@
-# maturita
+# pomocnik
 
 ChatGPT
 Grok ai

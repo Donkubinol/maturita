@@ -1,1 +1,4 @@
 # maturita
+
+ChatGPT
+Grok ai

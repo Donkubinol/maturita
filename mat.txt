@@ -1,0 +1,100 @@
+Zálohy
+1- Na Serveru klikneme na zařízení -> optické mechaniky -> choose a disk file a připojíme soubor maturita_new.iso
+2- V průzkumníku souborů jej otevřeme a přetáhneme na plochu program Cobian Backup 11
+3- Na klientovy si vytvoříme libovolnou složku např.: Zálohy a nasdílíme jí pomocí nastavení ve vlastnostech, zde si lze také nastavit opravnění atd... (zkopírujte si cestu ke složce)
+4- V průzkumníku souborů klikneme na síť pravým tlačítkem, dále klikneme na přidat síťovou jednotku a napíšeme zde cestu ke sdílené složce př.: \{nazevPC}\Zálohy
+5- Na Serveru si vytvoříme destination složku s názvem Backup
+6- Nainstalujeme Cobian Backup 11 -> zadame domenu\username a heslo
+7- Na horní liště klikneme na Task -> new Task
+8- Do Source dáme sdílenou složku
+9- Do Destination dáme složku na zálohy, kterou jsme si vytvořili na serveru
+10- Vše potvrdíme a restartujeme cobiana
+11- Následně vyzkoušíme spuštěním tasků
+Nebojte se erroru při instalaci, občas ho to hodí. Stačí jen vykřížkovat a pokračovat dál
+Pokud vydíte Engine not found mělo by stačit jen vypnout a zapnout cobiana přes spodní lištu
+
+složky a mapování
+Vytvoření OJ + uživatelů:
+1- Otevřeme Uživatelé a počítače a služby Active Directory
+2- Poté klikneme pravým tlačítkem na {název-domény}.local
+a vytvoříme novou organizační jednotku s libovolným názvem např.: Skola
+3- V této OJ vytvoříme další 4 OJ: Zamestnanci, Zaci, Skupiny a Administratori
+4- OJ Zamestnanci rozdělíme na 3 části: THP, Ucetni, Ucitele
+5- V OJ Administratori vytvoříme nového uživatele např.: Jiří Macek -login: macekj, pass: Heslo11 a vyškrtneme vše
+6- Klikneme na vlastnosti účtu Jiří Macek a najedeme na kolonku Je členem
+7- Zde napíšeme do kolonky Domain admins a zkontrolujeme
+8- Poté Administrators, Remote Desktop Users a stiskneme použít a OK
+9- Teď v OJ Ucitele vytvoříme uživatele např.: Jaroslav Dvořák - login: dvorakj, pass: Heslo11 a vyškrtneme vše
+Domovské složky:
+10- Následně na disku C vytvoříme složku Home, ve které vytvoříme složku Administratori, Zamestnanci(v této ještě THP, Ucitele, Ucetni), Zaci stejně jako OJ v Active Directory
+11- Klikneme na vlastnosti složky Home -> Sdílení -> Rozšířené možnosti sdílení -> Sdílet tuto složku -> Opravnění = Změnit a číst pro Everyone
+12- Zkopírujeme si cestu ke složce Administratori a vrátíme se zpět do Active Directory
+13- Klikneme na vlastnosti účtu Jiří Macek (administrator) a připojíme domovskou složku k profilu -> Zkopírovaná cesta sdílené složky + za to dopíšeme %username% př.: \SERVER1\Home\Administratori%username%
+14- Nyní klikneme na vlastnosti složky která se nám díky %username% vytvořila (macekj)
+15- Zabezpečení -> Upřesnit -> Zakázat dědičnosti (odebrat veškerá zděděná oprávnění tohoto objektu) -> použít -> OK
+16- Toto uděláme pro každou OJ!!!
+17- Přihlásíme se na klientovy na žáka (př.:havlikd)
+18- Zkontrolujeme v tomto počítačí zda vídíme danou složku a zkusíme se napojit na složku na kterou by jsme neměli mít oprávnění a tím zkontrolujeme zda je vše funkční
+Skupiny:
+19- v AD vytvoříme v OJ Skupiny skupinu zaci
+20- poté klikneme na vlastnosti -> členové -> přidat a přidáme uživatele z dané OJ
+21- To samé uděláme pro dané OJ, které potřebujeme
+22- Klikneme na dvorakj pravým tlačítkem a najdeme kolonku Je členem
+23- Na serveru C: vytvoříme složku Skola
+24- V ní vytvoříme složky: install, zadani, dokumenty
+25- Klikneme na zadání pravým tlačítkem a nasdílíme složku, (měnit a číst)
+26- Přejdeme do zabezpečení a upravit -> zde přidáme skupinu zaci a ucitele -> zaci nemaji zadna prava, ucitele vsechna
+27- To samé uděláme ve složce install, jen si upravíme oprávnění tak jak potřebujeme + přidáme macekj jako správce
+Mapování jednotek:
+28- Otevřeme správu zásad skupiny -> domény -> Skola 
+29- Na Skolu klikneme pravým tlačítkem a dáme vytvořit objekt zásad skupiny...
+30- Pojmenujeme to mapovani
+31- Klikneme pravým -> upravit -> předvolny -> Nastavení systému Windows -> mapování jednotek -> nová položka (mapovaná jednotka)
+32- do umíštění dáme síťovou cestu k složce zadání -> použít H:
+33- Zobrazit tuto jednotku + zobrazit všechny jednotky -> použít -> OK
+34- To samé uděláme u všech dalších složek, jen zaškrtneme připojit znovu a jiné písmeno pro disk
+
+p2p
+1- Nainstalujeme 2x Windows 10 Pro
+2- Vlastní instalace
+3- Vytvoříme libovolný účet na obou klientech(nutno zapsat do tabulky hesel v dokumentaci)
+4- Nastavíme na obou klientech vnitřní síť
+5- Klikneme na tento počítač pravým tlačítkem -> vlastnosti -> přejmenovat počítač (nastavíme je na PC-01 a PC-02)
+6- Je nutno PC restartovat aby se změny projevily
+7- Na PC-01 nastavíme IP adresu např.: 192.168.0.1 a na PC-02 192.168.0.100 
+8- Půjdeme znovu na změnu názvu, ale tentokrát změníme workgroup (např.: SKOLA)
+9- Změníme na obou klientech!
+10- Pak už stačí jen pingnout a zkontrolovat zda to funguje
+
+tiskarna
+1- ke klientovy(př.: PC-01) připojíme pomocí zařízení -> optické disky -> choose a disk file, soubor maturita_new.iso
+2- Přetáhneme si na plochu z tohoto disku PDFCreator-1_7_5_setup a spustíme installer
+3- Odškrtneme PDF architect
+4- Otevřeme si ovládací panely -> Hardware a zvuk -> zařízení a tiskárny
+5- Pravým tlačítkem klikneme na PDFcreator -> Vlastnosti tiskárny -> Sdílení
+6- Zaškrtneme sdílet tuto tiskárnu -> použít -> OK
+7- Půjdeme na druhého klienta (př.: PC-02) otevřeme ovládací panely -> Hardware a zvuk -> zařízení a tiskárny
+8- Dáme přidat tiskárnu -> vyhledat tiskárnu
+9- Pokud samo nenajde tiskárnu přidáme jí ručně pomocí síťové cesty v našem případě \PC-01\PDFCreator
+10- Pokud to hazí error 0x0000011b. - Systém Windows se nepodařilo připojit k tiskárně tak nebojte
+11- Půjdeme na PC-01 kde máme PDFCreator a zmáčkneme Win+R -> regedit -> enter
+12- Najdete tuto cestu HKEY_LOCAL_MACHINE\Systém\CurrentControlSet\Control\Print
+13- Zde klikneme pravým -> nový -> Hodnota Dword(32bit)
+14- Tu pojmenujeme RpcAuthnLevelPrivacyEnabled
+15- Dvojklikem po vytvoření nastavíme hodnotu na 0
+16- Nyní stačí restartovat PC
+17- Ted zopakujeme ruční připojení tiskárny a vše by mělo fungovat
+Tady jsem mel problem, ze se v pohode pripojim, ale proste ten tisk neni videt v PDFCreatoru na serveru
+Takze jestli mate nekdo fix?
+
+word
+1- Ve wordu půjdeme na poslední stránku na, které číslovaní necheme
+2- Nahoře v kolonce Hledat vyhledáme konec stránek a oddílů -> konec oddílu na další stránce
+3- Nyní 2x klikneme na zápatí nebo záhlaví
+4- Najdeme Záhlaví/Zápatí oddíl - 2 a klikneme do něj
+5- V horní liště najdeme Propojit s předchozím a odklikneme jej!
+6- Nyní půjdeme do 2 oddílu konkrétně do zápatí a přidáme číslování stránek dle libovolného formátu
+7- Teď v horní liště klikneme na číslo stránky -> Formát číslování stránek 
+8- Zde zaklikneme Začít od a napíšeme 1
+9- Po uložení by jsme měli mít např.: 4 stránku s číslem jedna
+10- Pak už bude číslování pokračovat automaticky

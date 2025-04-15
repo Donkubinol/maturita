@@ -1,0 +1,10 @@
+1- Ve wordu půjdeme na poslední stránku na, které číslovaní necheme
+2- Nahoře v kolonce Hledat vyhledáme konec stránek a oddílů -> konec oddílu na další stránce
+3- Nyní 2x klikneme na zápatí nebo záhlaví
+4- Najdeme Záhlaví/Zápatí oddíl - 2 a klikneme do něj
+5- V horní liště najdeme Propojit s předchozím a odklikneme jej!
+6- Nyní půjdeme do 2 oddílu konkrétně do zápatí a přidáme číslování stránek dle libovolného formátu
+7- Teď v horní liště klikneme na číslo stránky -> Formát číslování stránek 
+8- Zde zaklikneme Začít od a napíšeme 1
+9- Po uložení by jsme měli mít např.: 4 stránku s číslem jedna
+10- Pak už bude číslování pokračovat automaticky
